@@ -1,7 +1,7 @@
 <html lang="en"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:pp="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <!-- Required meta tags -->
@@ -42,12 +42,41 @@
 
     <div class="container">
         <div class="row py-2">
-            <h:form id="customerTableForm">
+            <h:form>
                 <div class="col-12">
                     <h:commandButton value="Add Customer" styleClass="btn btn-success"
                                      action="#{customerController.addCustomer()}"/>
                 </div>
+            </h:form>
+            <h:form id="TableForm">
+                <div class="card">
+                    <p:dataTable var="customer" value="#{customerController.findAll()}">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{customer.id}" />
+                        </p:column>
 
+                        <p:column headerText="Name">
+                            <h:outputText value="#{customer.name}" />
+                        </p:column>
+
+                        <p:column headerText="Mail">
+                            <h:outputText value="#{customer.mail}" />
+                        </p:column>
+
+                        <p:column headerText="Actions">
+                            <h:commandButton value="Edit" styleClass="btn btn-success"
+                                             action="#{customerController.editCustomer(customer)}"/>
+                            <h:commandButton value="Delete" styleClass="btn btn-danger"
+                                             action="#{customerController.deleteCustomerS(customer)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+
+
+            <!--                первый вариант таблицы -->
+
+            <h:form id="customerTableForm">
                 <div class="col-12">
                     <h:dataTable value="#{customerController.findAll()}" var="customer"
                                  styleClass="table table-bordered my-2">
@@ -74,7 +103,6 @@
                             </h:commandButton>
                         </h:column>
                     </h:dataTable>
-
                 </div>
             </h:form>
         </div>

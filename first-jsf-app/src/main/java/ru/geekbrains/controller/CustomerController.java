@@ -36,6 +36,11 @@ public class CustomerController implements Serializable {
         return "/customer_form.xhtml?faces-redirect=true";
     }
 
+    public String deleteCustomerS(Customer customer) {
+        customerRepository.delete(customer.getId());
+        return "/customer.xhtml?faces-redirect=true";
+    }
+
     public void deleteCustomer(Customer customer) {
         customerRepository.delete(customer.getId());
     }
