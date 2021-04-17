@@ -1,8 +1,9 @@
-package ru.geekbrains.persist;
+package ru.geekbrains.service.repr;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Product {
+public class ProductRepr implements Serializable {
 
     private Long id;
 
@@ -12,14 +13,20 @@ public class Product {
 
     private BigDecimal price;
 
-    public Product() {
+    private Long categoryId;
+
+    private String categoryName;
+
+    public ProductRepr() {
     }
 
-    public Product(Long id, String name, String description, BigDecimal price) {
+    public ProductRepr(Long id, String name, String description, BigDecimal price, Long categoryId, String categoryName) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
     }
 
     public Long getId() {
@@ -52,5 +59,21 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }
