@@ -1,7 +1,12 @@
 package ru.geekbrains.persist;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -15,37 +20,15 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Named
-@ApplicationScoped
+@Stateless
 public class CategoryRepository {
+
+    private static final Logger logger = LoggerFactory.getLogger(CategoryRepository.class);
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
 
-    @Resource
-    private UserTransaction ut;
-
-    @PostConstruct
-    public void init() {
-        if(count() == 0) {
-            try {
-                ut.begin();
-                for (int i = 0; i < 10; i++ ) {
-                    save(new Category(null, "Category-" + i));
-                }
-                ut.commit();
-            } catch (Exception ex) {
-                try {
-                    ut.rollback();
-                } catch (SystemException exx) {
-                    throw new RuntimeException(exx);
-                }
-                throw new RuntimeException(ex);
-            }
-        }
-    }
-
-    @Transactional
+    @TransactionAttribute
     public void save(Category category) {
         if (category.getId() == null) {
             em.persist(category);
@@ -53,12 +36,17 @@ public class CategoryRepository {
         em.merge(category);
     }
 
-    @Transactional
-    public void delete(Long id) {
+    @TransactionAttribute
+    public void deleteById(Long id) {
         em.createNamedQuery("deleteCategoryById")
                 .setParameter("id", id)
                 .executeUpdate();
     }
+
+    public Category getReference(Long id) {
+        return em.getReference(Category.class, id);
+    }
+
 
     public Category findById(Long id) {
         return em.find(Category.class, id);

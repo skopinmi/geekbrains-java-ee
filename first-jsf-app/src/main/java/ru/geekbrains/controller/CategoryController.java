@@ -43,7 +43,7 @@ public class CategoryController implements Serializable {
     }
 
     public void deleteCategory(Category category) {
-        categoryRepository.delete(category.getId());
+        categoryRepository.deleteById(category.getId());
     }
 
     public String saveCategory() {
