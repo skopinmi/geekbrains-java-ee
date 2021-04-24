@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>JSF Web App</title>
+    <title>EShop application</title>
 </h:head>
 
 <h:body>
@@ -21,19 +21,15 @@
     <f:event listener="#{productController.preloadData}" type="preRenderView"/>
 
     <ui:include src="WEB-INF/fragments/menu.xhtml">
-        <ui:param name="pageName" value="product"/>
+        <ui:param name="pageName" value="cart"/>
     </ui:include>
 
     <div class="container">
         <div class="row py-2">
-            <h:form id="productTableForm">
-                <div class="col-12">
-                    <h:commandButton value="Add Product" styleClass="btn btn-success"
-                                     action="#{productController.addProduct()}"/>
-                </div>
+            <h:form id="cartTableForm">
 
                 <div class="col-12">
-                    <h:dataTable value="#{productController.findAll()}" var="product"
+                    <h:dataTable value="#{cartController.findAll()}" var="product"
                                  styleClass="table table-bordered my-2">
                         <h:column>
                             <f:facet name="header">Id</f:facet>
@@ -58,15 +54,9 @@
                         <h:column>
                             <f:facet name="header">Actions</f:facet>
 
-                            <h:commandButton value="Edit" styleClass="btn btn-success"
-                                              action="#{productController.editProduct(product)}"/>
                             <h:commandButton value="Delete" styleClass="btn btn-danger"
-                                              action="#{productController.deleteProduct(product)}">
-                                <f:ajax event="click" render="productTableForm"/>
-                            </h:commandButton>
-                            <h:commandButton value="Add to cart" styleClass="btn btn-success"
-                                             action="#{cartController.add(product)}">
-                                <f:ajax event="click"/>
+                                             action="#{cartController.delete(product)}">
+                                <f:ajax event="click" render="cartTableForm"/>
                             </h:commandButton>
                         </h:column>
                     </h:dataTable>

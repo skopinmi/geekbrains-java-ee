@@ -7,6 +7,7 @@
     <modules>
         <module>first-web-app</module>
         <module>first-jsf-app</module>
+        <module>client-app</module>
     </modules>
 
     <groupId>ru.geekbrains</groupId>

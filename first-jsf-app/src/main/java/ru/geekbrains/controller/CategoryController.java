@@ -1,11 +1,11 @@
 package ru.geekbrains.controller;
 
 import ru.geekbrains.persist.Category;
-import ru.geekbrains.persist.CategoryRepository;
+import ru.geekbrains.service.CategoryService;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -14,15 +14,15 @@ import java.util.List;
 @SessionScoped
 public class CategoryController implements Serializable {
 
-    @Inject
-    private CategoryRepository categoryRepository;
+    @EJB
+    private CategoryService categoryService;
 
     private Category category;
 
     private List<Category> categoryList;
 
     public void preloadData(ComponentSystemEvent componentSystemEvent) {
-        this.categoryList = categoryRepository.findAll();
+        this.categoryList = categoryService.findAll();
     }
 
     public Category getCategory() {
@@ -43,11 +43,12 @@ public class CategoryController implements Serializable {
     }
 
     public void deleteCategory(Category category) {
-        categoryRepository.deleteById(category.getId());
+        categoryService.delete(category.getId());
+
     }
 
     public String saveCategory() {
-        categoryRepository.save(category);
+        categoryService.save(category);
         return "/category.xhtml?faces-redirect=true";
     }
 

@@ -1,0 +1,82 @@
+#f. Получить все товары;
+
+GET http://localhost:8080/first-jsf-app/api/v1/product
+
+###
+#Получить товар по Id;
+
+GET http://localhost:8080/first-jsf-app/api/v1/product/1
+
+###
+#e. Получить товар по имени;
+
+GET http://localhost:8080/first-jsf-app/api/v1/product/nameProduct 3
+
+###
+#g. Получить товары по Id категории.
+
+GET http://localhost:8080/first-jsf-app/api/v1/product/category5
+
+###
+#Добавлять товар в БД;
+
+POST  http://localhost:8080/first-jsf-app/api/v1/product
+Content-Type: application/json
+
+{
+  "description": "Description 2",
+  "name": "Product REST 2",
+  "price": 102.00,
+  "categoryId": 1
+}
+
+###
+# изменить товар в БД
+
+PUT http://localhost:8080/first-jsf-app/api/v1/product
+Content-Type: application/json
+
+{
+  "id": 5,
+  "description": "Description 2222",
+  "name": "Product REST 2222",
+  "price": 102.00,
+  "categoryId": 1
+}
+
+###
+#Удалять товар из БД;
+
+DELETE http://localhost:8080/first-jsf-app/api/v1/product/5
+
+
+###
+# добавить категорию
+
+PUT http://localhost:8080/first-jsf-app/api/v1/category
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "Category REST New Name"
+}
+
+
+
+
+###
+
+GET http://localhost:8080/first-jsf-app/api/v1/category
+
+###
+
+POST  http://localhost:8080/first-jsf-app/api/v1/category
+Content-Type: application/json
+
+{
+  "name": "Category REST"
+}
+
+###
+
+DELETE http://localhost:8080/first-jsf-app/api/v1/category/11

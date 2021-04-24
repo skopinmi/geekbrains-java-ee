@@ -42,6 +42,18 @@ public class ProductRepository {
                 .getResultList();
     }
 
+    public List<Product> findByName(String name) {
+        return em.createNamedQuery("findByName", Product.class)
+                .setParameter("name", name)
+                .getResultList();
+    }
+
+    public List<Product> findByCategoryId(long id) {
+        return em.createNamedQuery("findByCategoryId", Product.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
+
     public long count() {
         return em.createNamedQuery("countProduct", Long.class).getSingleResult();
     }
