@@ -16,14 +16,26 @@
             <li class="nav-item active">
                 <h:link styleClass="nav-link" value="Product" outcome="/product"/>
             </li>
-            <li class="nav-item active">
-                <h:link styleClass="nav-link" value="Customer" outcome="/customer"/>
+            <li class="nav-item active" >
+                <h:link styleClass="nav-link" rendered="#{request.isUserInRole('ADMIN')}" value="User" outcome="/admin/user"/>
             </li>
             <li class="nav-item active">
-                <h:link styleClass="nav-link" value="Category" outcome="/category"/>
+                <h:link styleClass="nav-link" rendered="#{request.isUserInRole('ADMIN')}" value="Category" outcome="/category"/>
             </li>
             <li class="nav-item active">
                 <h:link styleClass="nav-link" value="Cart" outcome="/cart"/>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <h:link styleClass="btn btn-primary" rendered="#{request.userPrincipal == null}"
+                        value="Login" outcome="/login"/>
+
+                <h:form styleClass="ml-2">
+                    <h:commandLink styleClass="btn btn-primary" rendered="#{request.userPrincipal != null}"
+                                   action="#{userController.logout()}"
+                                   value="Logout #{request.remoteUser}"/>
+                </h:form>
             </li>
         </ul>
     </div>

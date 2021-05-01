@@ -6,6 +6,7 @@ import ru.geekbrains.persist.ProductRepository;
 import ru.geekbrains.rest.ProductResource;
 import ru.geekbrains.service.repr.ProductRepr;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 
 import javax.ejb.Stateless;

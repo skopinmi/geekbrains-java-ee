@@ -5,6 +5,7 @@ import ru.geekbrains.persist.CategoryRepository;
 import ru.geekbrains.rest.CategoryResource;
 import ru.geekbrains.service.repr.CategoryRepr;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;

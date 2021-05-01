@@ -29,6 +29,7 @@
             <h:form id="productTableForm">
                 <div class="col-12">
                     <h:commandButton value="Add Product" styleClass="btn btn-success"
+                                     rendered="#{request.isUserInRole('ADMIN')}"
                                      action="#{productController.addProduct()}"/>
                 </div>
 
@@ -59,8 +60,10 @@
                             <f:facet name="header">Actions</f:facet>
 
                             <h:commandButton value="Edit" styleClass="btn btn-success"
+                                             rendered="#{request.isUserInRole('ADMIN')}"
                                               action="#{productController.editProduct(product)}"/>
                             <h:commandButton value="Delete" styleClass="btn btn-danger"
+                                             rendered="#{request.isUserInRole('ADMIN')}"
                                               action="#{productController.deleteProduct(product)}">
                                 <f:ajax event="click" render="productTableForm"/>
                             </h:commandButton>

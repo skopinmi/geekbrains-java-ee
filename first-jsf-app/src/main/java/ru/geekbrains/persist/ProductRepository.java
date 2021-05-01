@@ -1,5 +1,6 @@
 package ru.geekbrains.persist;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
@@ -11,7 +12,6 @@ public class ProductRepository {
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
-
 
     @TransactionAttribute
     public void save(Product product) {
